@@ -10,7 +10,7 @@ async def test_create_user(client: AsyncClient):
         "username": "admin",
         "name": "George",
         "family_name": "Test",
-        "password": "admin"
+        "password": "admin",
     }
     response = await client.post("/users", json=payload)
     assert response.status_code == 200, response.text

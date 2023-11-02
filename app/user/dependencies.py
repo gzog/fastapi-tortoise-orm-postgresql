@@ -1,20 +1,19 @@
-import jwt
 from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
-from app import settings
-from app.user.helpers.security import OAUTH2_SCHEME
 from app.user.models import User
-from app.user.schemas import UserRequest, UserResponse
+
+security = HTTPBasic()
 
 
-async def get_current_user(token: str = Depends(OAUTH2_SCHEME)):
-    try:
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
-        user = await User.get(id=payload.get("id"))
-    except:
+async def get_current_user(credentials: HTTPBasicCredentials = Depends(security)):
+    user = await User.get(username=credentials.username)
+    if user is None or not user.verify_password(
+        credentials.password,
+    ):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid username or password",
+            detail="Invalid credentials",
+            headers={"WWW-Authenticate": "Basic"},
         )
-
-    return await UserResponse.from_tortoise_orm(user)
+    return user
