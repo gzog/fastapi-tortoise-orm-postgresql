@@ -16,3 +16,6 @@ TORTOISE_ORM = {
         },
     },
 }
+
+
+SECRET_KEY = "test"

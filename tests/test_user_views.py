@@ -19,6 +19,5 @@ async def test_create_user(client: AsyncClient):
     assert "id" in data
 
     user_id = data["id"]
-
     user_obj = await User.get(id=user_id)
     assert user_obj.id == user_id

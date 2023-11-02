@@ -1,9 +1,10 @@
-from tortoise import fields, models
+from passlib.hash import bcrypt
+from tortoise import fields
 
-from app.core.mixins import TimestampsMixin
+from app.core.models import BaseModel
 
 
-class User(models.Model, TimestampsMixin):
+class User(BaseModel):
     """
     The User model
     """
@@ -22,6 +23,9 @@ class User(models.Model, TimestampsMixin):
         if self.name or self.family_name:
             return f"{self.name or ''} {self.family_name or ''}".strip()
         return self.username
+
+    def verify_password(self, password) -> bool:
+        return bcrypt.verify(password, self.password_hash)
 
     class PydanticMeta:
         computed = ["full_name"]
