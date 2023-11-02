@@ -15,7 +15,7 @@ def create_app() -> FastAPI:
     register_tortoise(
         app,
         db_url=settings.DB_URL,
-        modules={"models": ["app.note.models"]},
+        modules={"models": ["app.user.models"]},
         generate_schemas=False,
         add_exception_handlers=True,
     )
@@ -26,9 +26,9 @@ def create_app() -> FastAPI:
 
 
 def register_views(app: FastAPI):
-    from app.note.views import note_views
+    from app.user.views import router as user_router
 
-    app.include_router(note_views, prefix="/notes", tags=["Notes"])
+    app.include_router(user_router, prefix="/users", tags=["Users"])
 
 
 app = create_app()

@@ -1,4 +1,4 @@
-APP_NAME = "Notes"
+APP_NAME = "Users"
 APP_VERSION = "0.0.2"
 POSTGRESQL_HOSTNAME = "localhost"
 POSTGRESQL_USERNAME = "postgres"
@@ -11,7 +11,7 @@ TORTOISE_ORM = {
     "connections": {"default": DB_URL},
     "apps": {
         "models": {
-            "models": ["app.note.models", "aerich.models"],
+            "models": ["app.user.models", "aerich.models"],
             "default_connection": "default",
         },
     },
