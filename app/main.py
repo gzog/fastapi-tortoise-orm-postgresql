@@ -18,7 +18,7 @@ def create_app() -> FastAPI:
         db_url=settings.DB_URL,
         modules={"models": ["app.user.models"]},
         generate_schemas=False,
-        add_exception_handlers=True,
+        add_exception_handlers=False,
     )
 
     register_views(app=app)
@@ -26,7 +26,7 @@ def create_app() -> FastAPI:
     return app
 
 
-def register_views(app: FastAPI):
+def register_views(app: FastAPI) -> None:
     app.include_router(user_router, prefix="/users", tags=["Users"])
 
 
