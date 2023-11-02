@@ -10,14 +10,19 @@ async def test_create_user(client: AsyncClient):
         "username": "admin",
         "name": "George",
         "family_name": "Test",
+        "password": "admin"
     }
     response = await client.post("/users", json=payload)
     assert response.status_code == 200, response.text
 
     data = response.json()
-    assert data["username"] == "admin"
+
     assert "id" in data
+    assert data["username"] == "admin"
+    assert data["name"] == "George"
+    assert data["family_name"] == "Test"
 
     user_id = data["id"]
-    user_obj = await User.get(id=user_id)
-    assert user_obj.id == user_id
+    user = await User.get(id=user_id)
+    assert user.verify_password(payload["password"])
+    assert user.id == user_id

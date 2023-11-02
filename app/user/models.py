@@ -14,7 +14,7 @@ class User(BaseModel):
     name = fields.CharField(max_length=50, null=True)
     family_name = fields.CharField(max_length=50, null=True)
     category = fields.CharField(max_length=30, default="misc")
-    password_hash = fields.CharField(max_length=128, null=True)
+    password = fields.CharField(max_length=128, null=True)
 
     def full_name(self) -> str:
         """
@@ -25,8 +25,8 @@ class User(BaseModel):
         return self.username
 
     def verify_password(self, password) -> bool:
-        return bcrypt.verify(password, self.password_hash)
+        return bcrypt.verify(password, self.password)
 
     class PydanticMeta:
         computed = ["full_name"]
-        exclude = ["password_hash", "created_at", "updated_at"]
+        exclude = ["created_at", "updated_at"]

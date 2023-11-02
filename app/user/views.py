@@ -1,4 +1,5 @@
 import jwt
+from passlib.hash import bcrypt
 from fastapi import Depends, status
 from fastapi.routing import APIRouter
 from fastapi.security import OAuth2PasswordRequestForm
@@ -21,6 +22,8 @@ async def get_users() -> list[UserResponse]:
 @router.post("", response_model=UserResponse)
 async def create_user(user_request: UserRequest) -> UserResponse:
     user = await User.create(**user_request.model_dump(exclude_unset=True))
+    user.password = bcrypt.hash(user_request.password)
+    await user.save()
     return await UserResponse.from_tortoise_orm(user)
 
 
