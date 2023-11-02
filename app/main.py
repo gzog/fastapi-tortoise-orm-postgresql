@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 
 from app import settings
+from app.user.views import router as user_router
 
 
 def create_app() -> FastAPI:
@@ -26,8 +27,6 @@ def create_app() -> FastAPI:
 
 
 def register_views(app: FastAPI):
-    from app.user.views import router as user_router
-
     app.include_router(user_router, prefix="/users", tags=["Users"])
 
 
