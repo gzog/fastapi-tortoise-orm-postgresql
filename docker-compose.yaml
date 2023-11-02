@@ -1,24 +1,35 @@
 version: "3"
 
 services: 
-    kpostgres:
-        hostname: kpostgres
-        image: bitnami/postgresql:latest
+    postgres:
+        image: postgres:latest
+        restart: always
+        ports:
+            - 5432:5432
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        healthcheck:
+            test: pg_isready -U postgres
+            interval: 3s
+            timeout: 2s
+            retries: 3
         environment:
-        - POSTGRESQL_USERNAME=guest
-        - POSTGRESQL_PASSWORD=guest
-        - POSTGRESQL_DATABASE=notesdb
-        ports: 
-        - "5432:5432"
-    note-service:
-        hostname: note-service
-        image: karthikasasanka/note-service:0.0.2
-        environment:
-        - POSTGRESQL_HOSTNAME=kpostgres
-        - POSTGRESQL_USERNAME=guest
-        - POSTGRESQL_PASSWORD=guest
-        - POSTGRESQL_DATABASE=notesdb
-        ports: 
-        - "5000:5000"
-        depends_on:
-            - kpostgres
+            - POSTGRES_USERNAME=postgres
+            - POSTGRES_PASSWORD=postgres
+    # app:
+    #     hostname: app
+    #     build:
+    #         context: .
+    #         dockerfile: Dockerfile
+    #     environment:
+    #     - POSTGRES_HOSTNAME=postgres
+    #     - POSTGRES_USERNAME=postgres
+    #     - POSTGRES_PASSWORD=postgres
+    #     - POSTGRES_DATABASE=notesdb
+    #     ports: 
+    #     - "5000:5000"
+    #     depends_on:
+    #         - postgres
+
+volumes:
+  pgdata:

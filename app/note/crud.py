@@ -1,9 +1,7 @@
-import re
-from typing import List
 from app.note.models import Note
 
 
-async def add(data: str, title: str=None) -> Note:
+async def add(data: str, title: str = None) -> Note:
     new_note = await Note.create(data=data, title=title)
     return new_note
 
@@ -13,12 +11,12 @@ async def get(id: int) -> Note:
     return note
 
 
-async def get_all() -> List[Note]:
+async def get_all() -> list[Note]:
     notes = await Note.all()
     return notes
 
 
-async def filter_by(text: str) -> List[Note]:
+async def filter_by(text: str) -> list[Note]:
     notes = await Note.filter(data__icontains=text)
     return notes
 

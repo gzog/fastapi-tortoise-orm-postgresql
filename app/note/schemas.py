@@ -1,9 +1,10 @@
-from typing import Optional
 from pydantic.main import BaseModel
 
+
 class Note(BaseModel):
-    id: Optional[int]
-    title: Optional[str] = None
+    id: int | None
+    title: str | None = None
     data: str
+
     class Config:
-        orm_mode = True
+        from_attributes = True

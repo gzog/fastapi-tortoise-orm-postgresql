@@ -1,6 +1,6 @@
-
-from tortoise.models import Model
 from tortoise import fields
+from tortoise.models import Model
+
 
 class Note(Model):
     id = fields.IntField(pk=True)
@@ -9,5 +9,5 @@ class Note(Model):
     created_at = fields.DatetimeField(auto_now_add=True)
     updated_at = fields.DatetimeField(auto_now=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.data
