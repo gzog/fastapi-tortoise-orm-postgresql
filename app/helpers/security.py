@@ -1,4 +1,4 @@
-from app.user.models import User
+from app.models import User
 
 
 async def authenticate_user(username: str, password: str):

@@ -3,9 +3,9 @@ from fastapi.routing import APIRouter
 from passlib.hash import bcrypt
 from starlette.exceptions import HTTPException
 
-from app.user.dependencies import get_current_user
-from app.user.models import User
-from app.user.schemas import Status, UserRequest, UserResponse
+from app.dependencies import get_current_user
+from app.models import User
+from app.schemas import Status, UserRequest, UserResponse
 
 router = APIRouter()
 
