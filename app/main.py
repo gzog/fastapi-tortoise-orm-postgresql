@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 
 from app import settings
-from app.views import router as user_router
+from app.api.user import router as user_router
 
 
 def create_app() -> FastAPI:
@@ -17,7 +17,7 @@ def create_app() -> FastAPI:
         app,
         db_url=settings.DB_URL,
         modules={"models": ["app.models"]},
-        generate_schemas=True,
+        generate_schemas=False,
         add_exception_handlers=False,
     )
 

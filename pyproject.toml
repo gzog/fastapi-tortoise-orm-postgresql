@@ -24,11 +24,7 @@ mypy = "^1.6.1"
 isort = "^5.12.0"
 flake8 = "^6.1.0"
 
-
 [tool.aerich]
 tortoise_orm = "app.settings.TORTOISE_ORM"
 location = "./migrations"
 src_folder = "./."
-[build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"

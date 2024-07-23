@@ -6,7 +6,9 @@ from app.models import User
 security = HTTPBasic()
 
 
-async def get_current_user(credentials: HTTPBasicCredentials = Depends(security)):
+async def get_current_user(
+    credentials: HTTPBasicCredentials = Depends(security),
+) -> User:
     user = await User.get(username=credentials.username)
     if user is None or not user.verify_password(
         credentials.password,

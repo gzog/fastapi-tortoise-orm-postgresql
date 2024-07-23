@@ -1,7 +1,7 @@
 from app.models import User
 
 
-async def authenticate_user(username: str, password: str):
+async def authenticate_user(username: str, password: str) -> User | bool:
     user = await User.get(username=username)
     if not user:
         return False
