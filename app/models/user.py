@@ -33,5 +33,4 @@ class User(Base, TimestampsMixin):
         return bcrypt.verify(password, self.password)
 
     class PydanticMeta:
-        computed = ["full_name"]
         exclude = ["created_at", "updated_at"]
