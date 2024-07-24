@@ -1,7 +1,7 @@
 from tortoise import fields
 
-from app.models.base import Base
-from app.models.mixins import TimestampsMixin
+from backend.models.base import Base
+from backend.models.mixins import TimestampsMixin
 
 
 class Publication(Base, TimestampsMixin):

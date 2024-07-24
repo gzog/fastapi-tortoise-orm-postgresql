@@ -2,9 +2,7 @@ from tortoise import Tortoise
 from typing import TypeAlias
 from tortoise.contrib.pydantic import pydantic_model_creator
 
-from app.models.user import User
-
-Tortoise.init_models(["app.models"], "models")
+from backend.models.user import User
 
 
 UserResponse: TypeAlias = pydantic_model_creator(User, name="User", exclude=["password"])  # type: ignore

@@ -20,5 +20,5 @@ RUN poetry config virtualenvs.create false \
 
 COPY ./app /usr/src/app
 
-CMD gunicorn --bind 0.0.0.0:5000 app.main:app -w 4 -k uvicorn.workers.UvicornWorker --reload --access-logfile - --error-logfile - --log-level info
+CMD gunicorn --bind 0.0.0.0:5000 backend.main:app -w 4 -k uvicorn.workers.UvicornWorker --reload --access-logfile - --error-logfile - --log-level info
 

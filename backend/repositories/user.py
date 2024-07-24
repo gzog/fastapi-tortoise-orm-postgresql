@@ -1,6 +1,6 @@
 from passlib.hash import bcrypt
 from tortoise.exceptions import IntegrityError
-from app.models.user import User
+from backend.models.user import User
 
 
 class UserRepository:

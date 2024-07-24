@@ -1,6 +1,6 @@
-from app.models.base import Base
-from app.models.publication import Publication
-from app.models.mixins import TimestampsMixin
+from backend.models.base import Base
+from backend.models.publication import Publication
+from backend.models.mixins import TimestampsMixin
 from tortoise import fields
 
 from passlib.hash import bcrypt

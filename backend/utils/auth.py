@@ -1,4 +1,4 @@
-from app.models import User
+from backend.models import User
 
 
 async def authenticate_user(username: str, password: str) -> User | bool:

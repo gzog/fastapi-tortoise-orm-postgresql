@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 
-from app import settings
-from app.api.user import router as user_router
+from backend import settings
+from backend.apps.user.api import router as user_router
 
 
 def create_app() -> FastAPI:
@@ -16,7 +16,7 @@ def create_app() -> FastAPI:
     register_tortoise(
         app,
         db_url=settings.DB_URL,
-        modules={"models": ["app.models"]},
+        modules={"models": ["backend.models"]},
         generate_schemas=False,
         add_exception_handlers=False,
     )

@@ -2,7 +2,7 @@ import pytest
 from httpx import AsyncClient
 from tortoise import Tortoise
 
-from app.main import app
+from backend.main import app
 
 DB_URL = "sqlite://:memory:"
 
@@ -10,9 +10,8 @@ DB_URL = "sqlite://:memory:"
 async def init_db(db_url) -> None:
     """Initial database connection"""
     await Tortoise.init(
-        db_url=db_url, modules={"models": ["app.models"]}, _create_db=True
+        db_url=db_url, modules={"models": ["backend.models"]}, _create_db=True
     )
-    Tortoise.init_models(["app.models"], "label")
     await Tortoise.generate_schemas()
 
 

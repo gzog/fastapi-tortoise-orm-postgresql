@@ -1,13 +1,8 @@
-from fastapi import Depends
 from fastapi.routing import APIRouter
-from passlib.hash import bcrypt
 from starlette.exceptions import HTTPException
 
-from app.api.dependencies import get_current_user
-from app.repositories.user import UserRepository
-from app.models.user import User
-from app.schemas.user import UserUpdateRequest, UserCreateRequest, UserResponse
-from app.schemas.status import Status
+from backend.repositories.user import UserRepository
+from .schemas import UserUpdateRequest, UserCreateRequest, UserResponse
 
 router = APIRouter()
 
@@ -36,9 +31,7 @@ async def get_user(user_id: int) -> UserResponse:
 
 @router.put("/{user_id}", response_model=UserResponse)
 async def update_user(user_id: int, request: UserUpdateRequest) -> UserResponse:
-    user = await UserRepository.update(
-        user_id, request.model_dump(exclude_unset=True)
-    )
+    user = await UserRepository.update(user_id, request.model_dump(exclude_unset=True))
     if not user:
         raise HTTPException(status_code=404, detail=f"User {user_id} not found")
     return user
