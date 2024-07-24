@@ -26,5 +26,5 @@ flake8 = "^6.1.0"
 
 [tool.aerich]
 tortoise_orm = "backend.settings.TORTOISE_ORM"
-location = "./migrations"
+location = "./backend/models/migrations/"
 src_folder = "./."
